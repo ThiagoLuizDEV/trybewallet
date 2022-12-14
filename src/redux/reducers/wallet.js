@@ -40,6 +40,12 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: action.payload.expenses,
+      value: action.payload.expenses.reduce(
+        (prev, current) => prev
+        + (current.value * current.exchangeRates[current.currency].ask
+        ),
+        0,
+      ).toFixed(2),
     };
   }
   case TOTAL_VALUE: {

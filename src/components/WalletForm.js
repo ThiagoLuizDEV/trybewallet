@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCurrencie, sendExpenses, totalValue } from '../redux/actions';
+import { fetchCurrencie, sendExpenses } from '../redux/actions';
 
 class WalletForm extends Component {
   constructor() {
@@ -12,7 +12,6 @@ class WalletForm extends Component {
       currency: 'USD',
       method: 'Dinheiro',
       tag: 'Alimentação',
-      total: 0,
     };
   }
 
@@ -37,7 +36,6 @@ class WalletForm extends Component {
       currency,
       method,
       tag,
-      total,
     } = this.state;
     const response = await fetch('https://economia.awesomeapi.com.br/json/all');
     const data = await response.json();
@@ -61,10 +59,6 @@ class WalletForm extends Component {
       method: 'Dinheiro',
       tag: 'Alimentação',
     });
-    const convertendo = Number(value) * data[currency].ask;
-    const somado = parseFloat((total + convertendo).toFixed(2));
-    dispatch(totalValue(somado));
-    this.setState({ total: somado });
   };
 
   render() {

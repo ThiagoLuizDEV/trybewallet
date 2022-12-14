@@ -54,3 +54,8 @@ export const fetchCurrencie = () => async (dispatch) => {
     dispatch(currencieError(error));
   }
 };
+export const DELETE = 'DELETE';
+export const buttonDelete = (id) => ({
+  type: DELETE,
+  payload: id,
+});
